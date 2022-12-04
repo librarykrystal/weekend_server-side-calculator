@@ -3,7 +3,7 @@ console.log('client.js TEST');
 $(document).ready(onReady);
 
 function onReady(){
-    console.log('f onReady TEST');
+    // console.log('f onReady TEST');
     $('#addBtn').on('click', selectAdd);
     $('#subtractBtn').on('click', selectSubtract);
     $('#multiplyBtn').on('click', selectMultiply);
@@ -39,22 +39,28 @@ let result;
 
 function submitIt(){
     // console.log('f submitIt TEST');
-        userInput = {
-            firstOperand: $('#firstNumber').val(),
-            operation: selectedOp,
-            secondOperand: $('#secondNumber').val(),
-        }
-    console.log('User Input:', userInput);
-    if(selectedOp == 'add'){
-        result = Number(userInput.firstOperand) + Number(userInput.secondOperand);
-    } else if(selectedOp == 'subtract'){
-        result = Number(userInput.firstOperand) - Number(userInput.secondOperand);
-    } else if(selectedOp == 'multiply'){
-        result = Number(userInput.firstOperand) * Number(userInput.secondOperand);
-    } else if(selectedOp == 'divide'){
-        result = Number(userInput.firstOperand) / Number(userInput.secondOperand);
+    userInput = {
+        firstOperand: $('#firstNumber').val(),
+        operation: selectedOp,
+        secondOperand: $('#secondNumber').val(),
     }
-    console.log(result);
+    // using submitIt to bundle into obj
+    // then to call postData function:
+    postData();
+
+    // below calc logic works, will need to be moved to happen server side - - - in module?
+
+    // console.log('User Input:', userInput);
+    // if(selectedOp == 'add'){
+    //     result = Number(userInput.firstOperand) + Number(userInput.secondOperand);
+    // } else if(selectedOp == 'subtract'){
+    //     result = Number(userInput.firstOperand) - Number(userInput.secondOperand);
+    // } else if(selectedOp == 'multiply'){
+    //     result = Number(userInput.firstOperand) * Number(userInput.secondOperand);
+    // } else if(selectedOp == 'divide'){
+    //     result = Number(userInput.firstOperand) / Number(userInput.secondOperand);
+    // }
+    // console.log(result);
 }
 
 function clearFields(){
@@ -71,3 +77,35 @@ function clearFields(){
 // edit to send the input obj to server via POST REQ
 // math gets done server side
 // use GET REQ to get result and append to DOM
+
+function postData(){
+    console.log('f postData TEST');
+    // $.ajax({
+    //     method: 'POST',
+    //     url: '/calc',
+    //     data: userInput,
+    // }).then(function(response){
+    //     console.log('POST response:', response);
+    //     // here is where we called getQuotes() which got the updated array
+         getResult();  // in this case we want to get the calculator result using GET below
+    // }).catch(function(error){
+    //     alert(error);
+    // })
+}
+
+function getResult(){
+    console.log('f getResult TEST');
+    // GET result from calc module
+    $.ajax({
+        method: 'GET',
+        url: '/calc',   // is defined in the app.get in server.js
+    }).then(function(response){
+        console.log('GET RESPONSE', response);
+    })
+    appendToDom();  // will add response within () prob
+}
+
+
+function appendToDom(){
+    console.log('f appendToDom TEST');
+}
