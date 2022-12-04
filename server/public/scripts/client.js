@@ -86,23 +86,30 @@ function postData(){
     //     data: userInput,
     // }).then(function(response){
     //     console.log('POST response:', response);
-    //     // here is where we called getQuotes() which got the updated array
-         getResult();  // in this case we want to get the calculator result using GET below
+        // here is where we called getQuotes() which got the updated array
+        getResult();  // in this case we want to get the calculator result using GET below
     // }).catch(function(error){
     //     alert(error);
     // })
 }
 
 function getResult(){
-    console.log('f getResult TEST');
+    console.log('client.js f getResult TEST');
     // GET result from calc module
     $.ajax({
         method: 'GET',
         url: '/calc',   // is defined in the app.get in server.js
     }).then(function(response){
-        console.log('GET RESPONSE', response);
+        console.log('GET RESPONSE', response);  // this will be empty until POST is active
     })
-    appendToDom();  // will add response within () prob
+    $.ajax({
+        method: 'GET',
+        url: '/history',   // is defined in the app.get in server.js
+    }).then(function(response){
+        console.log('GET RESPONSE', response);  // this will be empty until POST is active
+    })
+    
+    appendToDom();  // will add response within () 
 }
 
 
