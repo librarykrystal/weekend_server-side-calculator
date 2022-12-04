@@ -35,7 +35,7 @@ function selectDivide(){
 }
 
 let userInput;
-let result;
+// let result;
 
 function submitIt(){
     // console.log('f submitIt TEST');
@@ -48,7 +48,7 @@ function submitIt(){
     // then to call postData function:
     postData();
 
-    // below calc logic works, will need to be moved to happen server side - - - in module?
+    // below calc logic works here, will need to be moved to calc module
 
     // console.log('User Input:', userInput);
     // if(selectedOp == 'add'){
@@ -71,26 +71,30 @@ function clearFields(){
     $('#secondNumber').val('');
 }
 
-
-// got calc functionality working first
-// NEXT...
-// edit to send the input obj to server via POST REQ
-// math gets done server side
-// use GET REQ to get result and append to DOM
-
 function postData(){
     console.log('f postData TEST');
-    // $.ajax({
-    //     method: 'POST',
-    //     url: '/calc',
-    //     data: userInput,
-    // }).then(function(response){
-    //     console.log('POST response:', response);
+    $.ajax({
+        method: 'POST',
+        url: '/calc',
+        data: userInput,
+    }).then(function(response){
+        console.log('POST-calc response:', response);
         // here is where we called getQuotes() which got the updated array
         getResult();  // in this case we want to get the calculator result using GET below
-    // }).catch(function(error){
-    //     alert(error);
-    // })
+    }).catch(function(error){
+        alert(error);
+    })
+    $.ajax({
+        method: 'POST',
+        url: '/history',
+        data: userInput,
+    }).then(function(response){
+        console.log('POST-hist response:', response);
+        getResult();
+        getHistory();
+    }).catch(function(error){
+        alert(error);
+    })
 }
 
 function getResult(){
@@ -99,20 +103,29 @@ function getResult(){
     $.ajax({
         method: 'GET',
         url: '/calc',   // is defined in the app.get in server.js
-    }).then(function(response){
-        console.log('GET RESPONSE', response);  // this will be empty until POST is active
+    }).then(function(responseCalc){
+        console.log('GET RESPONSE', responseCalc);
     })
-    $.ajax({
-        method: 'GET',
-        url: '/history',   // is defined in the app.get in server.js
-    }).then(function(response){
-        console.log('GET RESPONSE', response);  // this will be empty until POST is active
-    })
-    
-    appendToDom();  // will add response within () 
+    appendResultToDom();  // add response within ()
 }
 
+function getHistory(){
+    // get history array from history module
+    $.ajax({
+        method: 'GET',
+        url: '/history',
+    }).then(function(responseHist){
+        console.log('GET RESPONSE', responseHist);
+    })
+    appendHistToDom();  // add response within ()
+}
 
-function appendToDom(){
-    console.log('f appendToDom TEST');
+function appendResultToDom(){
+    console.log('f appendResultToDom TEST');
+    // append
+}
+
+function appendHistToDom(){
+    console.log('f appendHistToDom TEST');
+    // append
 }

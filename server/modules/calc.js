@@ -1,5 +1,5 @@
 //let inputsArray = [];
-let currentInput = [];
+let currentInput;
 
 //console.log('Inputs:', inputsArray);
 console.log('calc.js currentInput:', currentInput);
