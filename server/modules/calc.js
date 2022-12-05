@@ -1,30 +1,30 @@
-//let inputsArray = [];
-let currentInput;
+let userInput;
+let result;
+let selectedOp;
 
-//console.log('Inputs:', inputsArray);
-console.log('calc.js currentInput:', currentInput);
+// console.log('calc.js userInput:', currentInput);
 
-// use the data in calc function
-// return result
-// export result
+console.log('calc.js userInput:', userInput);
+
+function doMath(){
+    if(selectedOp == 'add'){
+        result = Number(userInput.firstOperand) + Number(userInput.secondOperand);
+    } else if(selectedOp == 'subtract'){
+        result = Number(userInput.firstOperand) - Number(userInput.secondOperand);
+    } else if(selectedOp == 'multiply'){
+        result = Number(userInput.firstOperand) * Number(userInput.secondOperand);
+    } else if(selectedOp == 'divide'){
+        result = Number(userInput.firstOperand) / Number(userInput.secondOperand);
+    }
+    console.log('calc.js result:', result);
+    return result;
+}
+doMath();
 
 
-// will want to export calculation result in the end
-module.exports = currentInput;
+let testExport = 'TEST EXPORT';
 
+module.exports = testExport;
 
-
-
-// calculator logic copied over from client.js:
-
-    // console.log('User Input:', userInput);
-    // if(selectedOp == 'add'){
-    //     result = Number(userInput.firstOperand) + Number(userInput.secondOperand);
-    // } else if(selectedOp == 'subtract'){
-    //     result = Number(userInput.firstOperand) - Number(userInput.secondOperand);
-    // } else if(selectedOp == 'multiply'){
-    //     result = Number(userInput.firstOperand) * Number(userInput.secondOperand);
-    // } else if(selectedOp == 'divide'){
-    //     result = Number(userInput.firstOperand) / Number(userInput.secondOperand);
-    // }
-    // console.log(result);
+// export whole new object that includes result?
+//    or object AND result?

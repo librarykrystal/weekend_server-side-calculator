@@ -44,7 +44,7 @@ function submitIt(){
         operation: selectedOp,
         secondOperand: $('#secondNumber').val(),
     }
-    // using submitIt to bundle into obj
+    // using submitIt to bundle into obj (above)
     // then to call postData function:
     postData();
 
@@ -78,20 +78,8 @@ function postData(){
         url: '/calc',
         data: userInput,
     }).then(function(response){
-        console.log('POST-calc response:', response);
-        // here is where we called getQuotes() which got the updated array
-        getResult();  // in this case we want to get the calculator result using GET below
-    }).catch(function(error){
-        alert(error);
-    })
-    $.ajax({
-        method: 'POST',
-        url: '/history',
-        data: userInput,
-    }).then(function(response){
-        console.log('POST-hist response:', response);
+        console.log('POST response:', response);
         getResult();
-        getHistory();
     }).catch(function(error){
         alert(error);
     })
@@ -103,29 +91,13 @@ function getResult(){
     $.ajax({
         method: 'GET',
         url: '/calc',   // is defined in the app.get in server.js
-    }).then(function(responseCalc){
-        console.log('GET RESPONSE', responseCalc);
+    }).then(function(response){
+        console.log('GET RESPONSE/calc', response);
     })
-    appendResultToDom();  // add response within ()
+    appendToDom();  // add response within ()
 }
 
-function getHistory(){
-    // get history array from history module
-    $.ajax({
-        method: 'GET',
-        url: '/history',
-    }).then(function(responseHist){
-        console.log('GET RESPONSE', responseHist);
-    })
-    appendHistToDom();  // add response within ()
-}
-
-function appendResultToDom(){
-    console.log('f appendResultToDom TEST');
-    // append
-}
-
-function appendHistToDom(){
-    console.log('f appendHistToDom TEST');
+function appendToDom(){
+    // console.log('f appendToDom TEST');
     // append
 }
