@@ -12,24 +12,30 @@ app.listen(port, () => {
     console.log('listening on port', port);
 });
 
+let result;
+// let fullMath;
+let historyList = [];
 
 app.post('/calc', function(req, res){
     // console.log('server.js app.post/calc TEST', req.body);
     userInput = req.body;
-    console.log('app.post userInput:', req.body);
-    // console.log('REQ.BODY!', req.body.operation);
-    // console.log('USERINPUT!', userInput.operation);
-    if(req.body.operation == 'add'){
+    // console.log('app.post userInput:', req.body);
+    if(req.body.operation == '+'){
         result = Number(userInput.firstOperand) + Number(userInput.secondOperand);
-    } else if(req.body.operation == 'subtract'){
+    } else if(req.body.operation == '-'){
         result = Number(userInput.firstOperand) - Number(userInput.secondOperand);
-    } else if(req.body.operation == 'multiply'){
+    } else if(req.body.operation == '*'){
         result = Number(userInput.firstOperand) * Number(userInput.secondOperand);
-    } else if(req.body.operation == 'divide'){
+    } else if(req.body.operation == '/'){
         result = Number(userInput.firstOperand) / Number(userInput.secondOperand);
     }
-    console.log(result);
-
+    req.body.result = result;
+    // console.log('Math result:', result);
+    console.log('CURRENT:', req.body);
+    // fullMath = userInput.firstOperand + ' ' + userInput.operation + ' ' + userInput.secondOperand + ' = ' + result;
+    // console.log(fullMath);
+    historyList.push(req.body);
+    console.log('HISTORY:', historyList);
     res.sendStatus(201);
     // console.log('current input:', currentInput);
 });

@@ -16,22 +16,22 @@ let selectedOp;
 
 function selectAdd(){
     // console.log('f selectAdd TEST');
-    selectedOp = 'add';
+    selectedOp = '+';
 }
 
 function selectSubtract(){
     // console.log('f selectSubtract TEST');
-    selectedOp = 'subtract';
+    selectedOp = '-';
 }
 
 function selectMultiply(){
     // console.log('f selectMultiply TEST');
-    selectedOp = 'multiply';
+    selectedOp = '*';
 }
 
 function selectDivide(){
     // console.log('f selectDivide TEST');
-    selectedOp = 'divide';
+    selectedOp = '/';
 }
 
 let userInput;
@@ -43,6 +43,7 @@ function submitIt(){
         firstOperand: $('#firstNumber').val(),
         operation: selectedOp,
         secondOperand: $('#secondNumber').val(),
+        result: null,
     }
     // using submitIt to bundle into obj (above)
     // then to call postData function:
@@ -80,11 +81,18 @@ function getResult(){
         url: '/calc',   // is defined in the app.get in server.js
     }).then(function(response){
         console.log('GET RESPONSE/calc', response);
+        appendToDom(response);  // sending response to appendToDom function
     })
-    appendToDom();  // add response within ()
 }
 
-function appendToDom(){
-    // console.log('f appendToDom TEST');
-    // append
+
+// THIS APPROACH ISN'T RIGHT...
+// Check instructions
+// Needs to append list of all calcs each time
+// But when I tried a loop, it said not iterable
+// COME BACK TO THIS
+function appendToDom(historyArray){
+    console.log('f appendToDom TEST');
+    // $('#historyList').empty();
+    $('#historyList').append(`<li> ${historyArray.firstOperand} </li>`);
 }
