@@ -45,3 +45,8 @@ app.get('/calc', function(req, res){
     // console.log('server.js app.get/calc TEST');
     res.send(userInput);
 });
+
+app.get('/history', function(req, res){
+    // console.log('server.js app.get/history TEST');
+    res.send(historyList);
+})
