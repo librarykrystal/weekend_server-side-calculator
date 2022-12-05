@@ -47,27 +47,14 @@ function submitIt(){
     // using submitIt to bundle into obj (above)
     // then to call postData function:
     postData();
-
-    // below calc logic works here, will need to be moved to calc module
-
     // console.log('User Input:', userInput);
-    // if(selectedOp == 'add'){
-    //     result = Number(userInput.firstOperand) + Number(userInput.secondOperand);
-    // } else if(selectedOp == 'subtract'){
-    //     result = Number(userInput.firstOperand) - Number(userInput.secondOperand);
-    // } else if(selectedOp == 'multiply'){
-    //     result = Number(userInput.firstOperand) * Number(userInput.secondOperand);
-    // } else if(selectedOp == 'divide'){
-    //     result = Number(userInput.firstOperand) / Number(userInput.secondOperand);
-    // }
-    // console.log(result);
 }
 
 function clearFields(){
     // console.log('f clearFields TEST');
     $('#firstNumber').val('');
-    // how do i clear the operation variable?  Maybe don't need to since it'll just get re-assigned?
-    // if the operation button changes appearance when clicked, make it reset here
+    // operation will just get re-assigned each time a new button is clicked...
+    // if the operation button changed appearance when clicked, would reset that here
     $('#secondNumber').val('');
 }
 
@@ -78,7 +65,7 @@ function postData(){
         url: '/calc',
         data: userInput,
     }).then(function(response){
-        console.log('POST response:', response);
+        console.log('POST response:', response);   // this logs 'Created'
         getResult();
     }).catch(function(error){
         alert(error);
