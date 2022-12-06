@@ -12,6 +12,7 @@ app.listen(port, () => {
     console.log('listening on port', port);
 });
 
+let userInput;
 let result;
 // let fullMath;
 let historyList = [];

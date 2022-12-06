@@ -1,4 +1,4 @@
-console.log('client.js TEST');
+// console.log('client.js TEST');
 
 $(document).ready(onReady);
 
@@ -35,7 +35,6 @@ function selectDivide(){
 }
 
 let userInput;
-// let result;
 
 function submitIt(){
     // console.log('f submitIt TEST');
@@ -60,39 +59,51 @@ function clearFields(){
 }
 
 function postData(){
-    console.log('f postData TEST');
+    // console.log('f postData TEST');
     $.ajax({
         method: 'POST',
         url: '/calc',
         data: userInput,
     }).then(function(response){
-        console.log('POST response:', response);   // this logs 'Created'
+        // console.log('POST response:', response);   // this logs 'Created'
         getResult();
+        getHistory();
     }).catch(function(error){
         alert(error);
     })
 }
 
 function getResult(){
-    console.log('client.js f getResult TEST');
-    // GET result from calc module
+    // console.log('client.js f getResult TEST');
     $.ajax({
         method: 'GET',
         url: '/calc',   // is defined in the app.get in server.js
     }).then(function(response){
         console.log('GET RESPONSE/calc', response);
-        appendToDom(response);  // sending response to appendToDom function
+        appendResultToDom(response);  // sending response to append function
     })
 }
 
+function getHistory(){
+    $.ajax({
+        method: 'GET',
+        url: '/history',   // is defined in the app.get in server.js
+    }).then(function(response){
+        console.log('GET RESPONSE/history', response);
+        appendHistoryToDom(response);  // sending response to append function
+    })
+}
 
-// THIS APPROACH ISN'T RIGHT...
-// Check instructions
-// Needs to append list of all calcs each time
-// But when I tried a loop, it said not iterable
-// COME BACK TO THIS
-function appendToDom(historyArray){
-    console.log('f appendToDom TEST');
-    // $('#historyList').empty();
-    $('#historyList').append(`<li> ${historyArray.firstOperand} </li>`);
+function appendResultToDom(){
+    console.log('f appendResultToDom TEST');
+}
+
+function appendHistoryToDom(historyArray){
+    console.log('f appendHistoryToDom TEST', historyArray);
+    $('#historyList').empty();
+    for(let item of historyArray){
+        $('#historyList').append(`
+            <li>${item.firstOperand} ${item.operation} ${item.secondOperand} = ${item.result}</li>
+        `)
+    }
 }
