@@ -1,9 +1,9 @@
 # Project Name
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+Weekend Server-Side Calculator
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+I created a simplified calculator which uses ajax POST and GET requests to take user inputs, send them to the server where calculation is completed, then append both the current result and the history of calculations to the DOM.
 
 Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).

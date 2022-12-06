@@ -44,8 +44,6 @@ function submitIt(){
         secondOperand: $('#secondNumber').val(),
         result: null,
     }
-    // using submitIt to bundle into obj (above)
-    // then to call postData function:
     postData();
     // console.log('User Input:', userInput);
 }
@@ -53,8 +51,7 @@ function submitIt(){
 function clearFields(){
     // console.log('f clearFields TEST');
     $('#firstNumber').val('');
-    // operation will just get re-assigned each time a new button is clicked...
-    // if the operation button changed appearance when clicked, would reset that here
+    // operation will just get re-assigned each time a new button is clicked.
     $('#secondNumber').val('');
 }
 
@@ -87,10 +84,10 @@ function getResult(){
 function getHistory(){
     $.ajax({
         method: 'GET',
-        url: '/history',   // is defined in the app.get in server.js
+        url: '/history',
     }).then(function(response){
         console.log('GET RESPONSE/history', response);
-        appendHistoryToDom(response);  // sending response to append function
+        appendHistoryToDom(response);
     })
 }
 

@@ -14,7 +14,6 @@ app.listen(port, () => {
 
 let userInput;
 let result;
-// let fullMath;
 let historyList = [];
 
 app.post('/calc', function(req, res){
@@ -22,19 +21,16 @@ app.post('/calc', function(req, res){
     userInput = req.body;
     // console.log('app.post userInput:', req.body);
     if(req.body.operation == '+'){
-        result = Number(userInput.firstOperand) + Number(userInput.secondOperand);
+        result = Number(req.body.firstOperand) + Number(req.body.secondOperand);
     } else if(req.body.operation == '-'){
-        result = Number(userInput.firstOperand) - Number(userInput.secondOperand);
+        result = Number(req.body.firstOperand) - Number(req.body.secondOperand);
     } else if(req.body.operation == '*'){
-        result = Number(userInput.firstOperand) * Number(userInput.secondOperand);
+        result = Number(req.body.firstOperand) * Number(req.body.secondOperand);
     } else if(req.body.operation == '/'){
-        result = Number(userInput.firstOperand) / Number(userInput.secondOperand);
+        result = Number(req.body.firstOperand) / Number(req.body.secondOperand);
     }
     req.body.result = result;
-    // console.log('Math result:', result);
     console.log('CURRENT:', req.body);
-    // fullMath = userInput.firstOperand + ' ' + userInput.operation + ' ' + userInput.secondOperand + ' = ' + result;
-    // console.log(fullMath);
     historyList.push(req.body);
     console.log('HISTORY:', historyList);
     res.sendStatus(201);
