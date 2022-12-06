@@ -94,8 +94,10 @@ function getHistory(){
     })
 }
 
-function appendResultToDom(){
+function appendResultToDom(currentOp){
     console.log('f appendResultToDom TEST');
+    $('#calcResult').empty();
+    $('#calcResult').append(`${currentOp.result}`);
 }
 
 function appendHistoryToDom(historyArray){
